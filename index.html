@@ -6,9 +6,7 @@
     <title>Digital Nomad Экономикасы - Инфографика</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
-        /* Барлық бастапқы стильдер сақталды */
         :root {
             --primary: #667eea;
             --primary-light: #8e9ef3;
@@ -908,89 +906,6 @@
             opacity: 0.7;
         }
         
-        /* QR Code Section Styles */
-        .qr-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--border-radius-lg);
-            padding: 80px 40px;
-            margin: 100px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .qr-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-accent);
-        }
-        
-        .qr-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 60px;
-        }
-        
-        .qr-card {
-            background: var(--gradient-card);
-            border-radius: var(--border-radius);
-            padding: 50px 40px;
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        
-        .qr-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(240, 147, 251, 0.4);
-        }
-        
-        .qr-code {
-            width: 220px;
-            height: 220px;
-            margin: 0 auto 30px;
-            background: white;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        .qr-code img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        
-        .qr-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--accent-light);
-        }
-        
-        .qr-description {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-        
-        .qr-instruction {
-            font-size: 1rem;
-            opacity: 0.7;
-            font-style: italic;
-        }
-        
         /* Responsive Design */
         @media (max-width: 1200px) {
             h1 { font-size: 3.8rem; }
@@ -1047,15 +962,6 @@
                 height: 100px !important;
                 margin-bottom: 90px;
             }
-            
-            .qr-card {
-                padding: 40px 30px;
-            }
-            
-            .qr-code {
-                width: 180px;
-                height: 180px;
-            }
         }
         
         @media (max-width: 576px) {
@@ -1068,15 +974,6 @@
             
             .definition-cards {
                 grid-template-columns: 1fr;
-            }
-            
-            .qr-section {
-                padding: 60px 20px;
-            }
-            
-            .qr-code {
-                width: 160px;
-                height: 160px;
             }
         }
     </style>
@@ -1312,23 +1209,6 @@
         </div>
     </section>
 
-    <!-- QR Code Section -->
-    <section id="qr-section" class="section qr-section">
-        <div class="container">
-            <h2>Біздің цифрлық көшпенділер қауымына қосылыңыз</h2>
-            <p class="lead">Толық ақпарат алу үшін біздің негізгі веб-сайтымызға кіріңіз</p>
-            
-            <div class="qr-container">
-                <div class="qr-card">
-                    <div class="qr-code" id="qr-website"></div>
-                    <h3 class="qr-title">Веб-сайт</h3>
-                    <p class="qr-description">Бұл QR-кодты сканерлеу арқылы біздің веб-сайтымызға тікелей кіре аласыз</p>
-                    <p class="qr-instruction">Камераны QR-кодқа бағыттаңыз немесе QR сканер қолданбасын пайдаланыңыз</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Author Section -->
     <section class="section">
         <div class="container">
@@ -1395,22 +1275,6 @@
             });
         };
         
-        // Generate QR Code
-        const generateQRCode = () => {
-            // Ағымдағы веб-сайттың URL мекенжайын алу
-            const currentUrl = window.location.href;
-            
-            QRCode.toCanvas(document.getElementById('qr-website'), currentUrl, {
-                width: 180,
-                height: 180,
-                colorDark: '#1a1a2e',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
-            }, function(error) {
-                if (error) console.error(error);
-            });
-        };
-        
         // Initialize animations
         window.addEventListener('scroll', animateBars);
         
@@ -1424,9 +1288,6 @@
             }, 1000);
             
             setTimeout(animateCounter, 1500);
-            
-            // Initialize QR code
-            generateQRCode();
         });
         
         // Add interactive effects to buttons
