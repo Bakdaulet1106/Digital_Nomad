@@ -932,17 +932,17 @@
         
         .qr-container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 60px;
+            align-items: center;
             margin-top: 60px;
         }
         
         .qr-card {
             background: var(--gradient-card);
             border-radius: var(--border-radius);
-            padding: 40px 30px;
-            width: 280px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 500px;
             text-align: center;
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -956,9 +956,9 @@
         }
         
         .qr-code {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 25px;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 30px;
             background: white;
             border-radius: 15px;
             padding: 15px;
@@ -972,16 +972,23 @@
         }
         
         .qr-title {
-            font-size: 1.3rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--accent-light);
         }
         
         .qr-description {
-            font-size: 1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
             line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .qr-instruction {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-style: italic;
         }
         
         /* Responsive Design */
@@ -1018,10 +1025,6 @@
                 max-width: 350px;
                 justify-content: center;
             }
-            
-            .qr-container {
-                gap: 40px;
-            }
         }
         
         @media (max-width: 768px) {
@@ -1045,14 +1048,13 @@
                 margin-bottom: 90px;
             }
             
-            .qr-container {
-                flex-direction: column;
-                align-items: center;
+            .qr-card {
+                padding: 40px 30px;
             }
             
-            .qr-card {
-                width: 100%;
-                max-width: 350px;
+            .qr-code {
+                width: 180px;
+                height: 180px;
             }
         }
         
@@ -1070,6 +1072,11 @@
             
             .qr-section {
                 padding: 60px 20px;
+            }
+            
+            .qr-code {
+                width: 160px;
+                height: 160px;
             }
         }
     </style>
@@ -1308,32 +1315,15 @@
     <!-- QR Code Section -->
     <section id="qr-section" class="section qr-section">
         <div class="container">
-            <h2>Біздің Платформалар</h2>
-            <p class="lead">Біздің цифрлық көшпенділер қауымына әртүрлі платформалар арқылы қосылыңыз</p>
+            <h2>Біздің цифрлық көшпенділер қауымына қосылыңыз</h2>
+            <p class="lead">Толық ақпарат алу үшін біздің негізгі веб-сайтымызға кіріңіз</p>
             
             <div class="qr-container">
                 <div class="qr-card">
                     <div class="qr-code" id="qr-website"></div>
                     <h3 class="qr-title">Веб-сайт</h3>
-                    <p class="qr-description">Толық ақпарат алу үшін біздің негізгі веб-сайтымызға кіріңіз</p>
-                </div>
-                
-                <div class="qr-card">
-                    <div class="qr-code" id="qr-instagram"></div>
-                    <h3 class="qr-title">Instagram</h3>
-                    <p class="qr-description">Digital nomad өмір салтынан фото және бейнелер</p>
-                </div>
-                
-                <div class="qr-card">
-                    <div class="qr-code" id="qr-telegram"></div>
-                    <h3 class="qr-title">Telegram</h3>
-                    <p class="qr-description">Біздің қауымдастықпен байланысыңыз және жаңалықтар алыңыз</p>
-                </div>
-                
-                <div class="qr-card">
-                    <div class="qr-code" id="qr-linkedin"></div>
-                    <h3 class="qr-title">LinkedIn</h3>
-                    <p class="qr-description">Кәсіби желі және жұмыс мүмкіндіктері</p>
+                    <p class="qr-description">Бұл QR-кодты сканерлеу арқылы біздің веб-сайтымызға тікелей кіре аласыз</p>
+                    <p class="qr-instruction">Камераны QR-кодқа бағыттаңыз немесе QR сканер қолданбасын пайдаланыңыз</p>
                 </div>
             </div>
         </div>
@@ -1405,26 +1395,20 @@
             });
         };
         
-        // Generate QR Codes
-        const generateQRCode = (elementId, url, colorDark = '#1a1a2e', colorLight = '#ffffff') => {
-            QRCode.toCanvas(document.getElementById(elementId), url, {
-                width: 150,
-                height: 150,
-                colorDark: colorDark,
-                colorLight: colorLight,
+        // Generate QR Code
+        const generateQRCode = () => {
+            // Ағымдағы веб-сайттың URL мекенжайын алу
+            const currentUrl = window.location.href;
+            
+            QRCode.toCanvas(document.getElementById('qr-website'), currentUrl, {
+                width: 180,
+                height: 180,
+                colorDark: '#1a1a2e',
+                colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.H
             }, function(error) {
                 if (error) console.error(error);
             });
-        };
-        
-        // Initialize QR codes
-        const initQRCodes = () => {
-            // Replace these URLs with your actual platform links
-            generateQRCode('qr-website', 'https://digitalnomad-kz.example.com');
-            generateQRCode('qr-instagram', 'https://instagram.com/digitalnomad_kz');
-            generateQRCode('qr-telegram', 'https://t.me/digitalnomad_kz');
-            generateQRCode('qr-linkedin', 'https://linkedin.com/company/digitalnomad-kz');
         };
         
         // Initialize animations
@@ -1441,8 +1425,8 @@
             
             setTimeout(animateCounter, 1500);
             
-            // Initialize QR codes
-            initQRCodes();
+            // Initialize QR code
+            generateQRCode();
         });
         
         // Add interactive effects to buttons
